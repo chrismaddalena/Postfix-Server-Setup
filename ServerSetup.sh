@@ -499,7 +499,7 @@ setupSSH(){
 	HostbasedAuthentication no
 	PermitEmptyPasswords no
 	ChallengeResponseAuthentication no
-	PasswordAuthentication yes
+	PasswordAuthentication no
 	X11Forwarding yes
 	X11DisplayOffset 10
 	PrintMotd no
@@ -508,7 +508,7 @@ setupSSH(){
 	Banner no
 	AcceptEnv LANG LC_*
 	Subsystem sftp /usr/lib/openssh/sftp-server
-	UsePAM yes
+	UsePAM no
 	EOF
 
 	echo "AllowUsers ${user_name}" > /etc/ssh/sshd_config
@@ -528,7 +528,6 @@ function Install_GoPhish {
 	wget https://github.com/gophish/gophish/releases/download/v0.4.0/gophish-v0.4-linux-64bit.zip
 	unzip gophish-v0.4-linux-64bit.zip
 	cd gophish-v0.4-linux-64bit
-        sed -i 's/"listen_url" : "127.0.0.1:3333"/"listen_url" : "0.0.0.0:3333"/g' config.json
 	read -r -p "Do you want to add an SSL certificate to your GoPhish? [y/N] " response
 	case "$response" in
 	[yY][eE][sS]|[yY])
